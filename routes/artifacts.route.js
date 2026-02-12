@@ -6,9 +6,7 @@ import { upload } from "../middlewares/uploads.middleware.js";
 
 const router = express.Router();
 
-/**
- * Protected Artifact APIs
- */
+
 router.post("/", authMiddleware,upload.single("file"), createArtifact);
 router.get("/", authMiddleware,authorizeRoles("ADMIN","EDITOR"), getArtifacts);
 export default router;

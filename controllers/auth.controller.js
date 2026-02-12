@@ -4,9 +4,7 @@ import {
   loginService
 } from "../services/auth.service.js";
 
-/**
- * POST /auth/signup/initiate
- */
+
 export const initiateSignup = async (req, res) => {
   try {
     const { email } = req.body;

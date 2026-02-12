@@ -2,9 +2,7 @@ import cloudinary from "../config/cloudinary.js";
 import Artifact from "../models/artifact.js";
 import fs from 'fs';
 
-/**
- * Create a new artifact
- */
+
 export const createArtifactService = async ({
   title,
   content,

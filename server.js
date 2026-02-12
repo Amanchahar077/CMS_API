@@ -11,6 +11,14 @@ const PORT = process.env.PORT || 5000;
 
 connectDB();
 
+const server = http.createServer(app);
+const io = new Server(server,{
+  cors:{
+    origin:"*",
+    credentials:true,
+  }
+})
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

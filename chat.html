@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>Live chat test</h3>
+    <input id="userId" placeholder="Your user id" />
+    <button onclick="connectUser()">Connect</button>
+    <br /><br />
+    <input id="receiverId" placeholder="Receiver Id" />
+    <input id="message" placeholder="Meassage" />
+    <button onclick="sendMessage()">Send</button>
+
+    <div id="messages">
+      <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+      <script>
+        const socket = io("http://localhost:5000");
+
+        function connectUser() {
+          const userId = document.getElementById("userId").value;
+          socket.emit("user-online", userId);
+        }
+
+        function sendMessage() {
+          const senderId = document.getElementById("userId").value;
+          const receiverId = document.getElementById("receiverId").value;
+          const message = document.getElementById("message").value;
+
+          socket.emit("send-message", {
+            senderId,
+            receiverId,
+            message,
+          });
+        }
+
+        socket.on("receiver-message", (data) => {
+          appendMessage("Received: " + data.message);
+        });
+      </script>
+    </div>
+  </body>
+</html>
